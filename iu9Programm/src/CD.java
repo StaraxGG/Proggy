@@ -1,7 +1,7 @@
 import java.math.BigDecimal;
 
 /**
- * Einfache CD Klasse.
+ * Einfache CD Klasse für die Lagerverwaltung.
  *
  * @author (Nicolas Klein x Christan Weis)
  * @version (15.1.2018)

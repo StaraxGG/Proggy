@@ -3,7 +3,7 @@ public class meinStuff{
 	private String myName = "Nico";
 
 /**
-Forget to comment 3 stuff yeah
+Forget to comment 4 stuff yeah
 **/
 
 	public void main (String[]args){

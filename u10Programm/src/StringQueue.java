@@ -1,15 +1,24 @@
 public class StringQueue implements Queue{
 
-    String[] QueueTab;
-    int gefuellt = 0;
+    private String[] QueueTab;
+    private int gefuellt = 0;
+    private int max;
 
+    public StringQueue(int max){
+        this.max = max;
+    }
 
     @Override
     public void addlast(Object o) {
-        if (!o.getClass().equals(String.class)){
+        if (!o.getClass().equals(String.class)) {
             throw new IllegalArgumentException("Muss vom Typ String sein.");
         }
+        if (gefuellt+1 > QueueTab.length){
+            throw new IllegalArgumentException("Warteschlange bereits voll.");
+        }
+
         QueueTab[gefuellt] = (String) o;
+        gefuellt++;
     }
 
     @Override

@@ -1,3 +1,1 @@
 # Proggy
-yolo
-YEAH

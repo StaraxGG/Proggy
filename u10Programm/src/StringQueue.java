@@ -10,9 +10,11 @@ public class StringQueue implements Queue{
 
     @Override
     public void addlast(Object o) {
+/*
         if (!o.getClass().equals(String.class)) {
             throw new IllegalArgumentException("Muss vom Typ String sein.");
         }
+*/
         if (gefuellt+1 > QueueTab.length){
             throw new IllegalArgumentException("Warteschlange bereits voll.");
         }

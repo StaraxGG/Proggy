@@ -54,7 +54,7 @@ public class Artikel
      * Konstruktor der Klasse Artikel mit 2 Werten.
      *
      * @param  artikelNr    eine Artikelnummer
-     * @param  artikelBez   eine Artikelbezeichnung
+     * @param  artikelBezeichnung   eine Artikelbezeichnung
      */
 
     public Artikel(int artikelNr, String artikelBezeichnung){
@@ -66,7 +66,7 @@ public class Artikel
      * Weist dem Attribut ArtikelPreis einen neuen Wert zu.
      * Der neue Preis muss dabei größer oder gleich 0 sein.
      *
-     * @param  artikelPreisAktuel   neue Preis
+     * @param  preis   neue Preis
      */
 
     public void setArtikelPreisAktuell (BigDecimal preis){
@@ -81,7 +81,7 @@ public class Artikel
      * Weist dem Attribut ArtikelPreis einen neuen Wert zu.
      * Der neue Preis muss dabei größer oder gleich 0 sein.
      *
-     * @param  artikelPreisEK       neue Preis
+     * @param  preis       neue Preis
      */
 
     public void setArtikelPreisEK (BigDecimal preis){

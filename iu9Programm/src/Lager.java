@@ -165,6 +165,12 @@ public class Lager
         return -1;
     }
 
+    /**
+     * Gibt die in der Aufgabe gestellte Bestandliste aus.
+     *
+     * @return  bestandliste als String
+     */
+
     public String ausgabeBestandsliste(){
         StringBuffer sb = new StringBuffer();
         double gesamtpreis = 0;
@@ -221,6 +227,7 @@ public class Lager
      *
      * @return neues sortiertes Array der Klasse Artikel
      */
+
 
     private Artikel[] sort(Artikel[] a){
         for (int i = 0; i < anzahlArtikel; i++){

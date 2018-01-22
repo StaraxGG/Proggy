@@ -35,7 +35,7 @@ public class DVD extends Artikel
     /**
      * Validiert Erscheinungsjahr
      *
-     * @param spieldauer
+     * @param erscheinungsjahr
      */
 
     private void validiereErscheinungsjahr(int erscheinungsjahr){
@@ -55,10 +55,10 @@ public class DVD extends Artikel
         return this.titel;
     }
 
-    public String toString(){
+   /* public String toString(){
         return super.toString()+
                 "Titel: "+this.titel+"\n"+
                 "Spieldauer: "+this.spieldauer+"\n"+
                 "Erscheinungsjahr: "+this.erscheinungsjahr+"\n";
-    }
+    }*/
 }

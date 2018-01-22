@@ -42,11 +42,11 @@ public class CD extends Artikel
         return this.interpret + " : " + this.titel;
     }
 
-    public String toString()
+    /*public String toString()
     {
         return super.toString()+
                 "Interpret: "+this.interpret+"\n"+
                 "Titel: "+this.titel+"\n"+
                 "Anzahl Titel: "+this.anzahlTitel+"\n";
-    }
+    }*/
 }

@@ -169,15 +169,20 @@ public class Lager
      * Gibt die in der Aufgabe gestellte Bestandliste aus.
      *
      * @return  bestandliste als String
+     *
+     * TODO Better formating
      */
 
-    public String ausgabeBestandsliste(){
+    /*public String ausgabeBestandsliste(){
         StringBuffer sb = new StringBuffer();
         double gesamtpreis = 0;
 
-        sb.append("Lagerort: " + nameLager + "\n");
-        sb.append("\n");
-        sb.append("ArtNr\tBeschreibung\t\tPreis\tBestand\tGesamt\n");
+        String str1 = String.format("------%1------\n", nameLager);
+        sb.append(str1);
+        //sb.append("Lagerort: " + nameLager + "\n");
+        //sb.append("\n");
+        //sb.append(String.format("ArtNr\tBeschreibung\t\tPreis\tBestand\tGesamt\n"));
+        sb.append(String.format("%-4s | %-40s | %5s | %4s | %-6s", "ArtNr", "Beschreibung", "Preis", "Gesamt"));
         sb.append("---------------------------------------------\n");
 
         for (int i = 0; i < anzahlArtikel ; i++){
@@ -192,7 +197,26 @@ public class Lager
         sb.append("Gesamtwert:\t\t\t" + gesamtpreis + "€");
 
         return sb.toString();
+    }*/
+
+    public String ausgabeBestandsliste(){
+        StringBuffer sb = new StringBuffer();
+        BigDecimal gesamtpreis = BigDecimal.ZERO;
+
+        sb.append(String.format("------------------------------%s------------------------------\n", nameLager));
+        sb.append(String.format("%-4s | %-40.40s | %5s | %4s | %-6s \n", "ArtNr", "Beschreibung", "Preis", "Bestand", "Gesamt"));
+        sb.append("---------------------------------------------------------------------------\n");
+
+        for (int i = 0; i < anzahlArtikel ; i++){
+            sb.append(artikelTab[i]);
+            gesamtpreis = gesamtpreis.add(artikelTab[i].getGesamtPreisLagerung());
+        }
+        sb.append("---------------------------------------------------------------------------\n");
+        sb.append("Gesamtwert:\t\t\t" + gesamtpreis + "€");
+
+        return sb.toString();
     }
+
     /**
      * toString Methode des Lagers.
      */

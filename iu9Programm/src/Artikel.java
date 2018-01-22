@@ -163,15 +163,28 @@ public class Artikel
      * @return      Preis*Menge
      */
 
-    public double getGesamtPreisLagerung(){
-        return this.artikelPreisAktuell.doubleValue() * this.artikelBestand;
+    public BigDecimal getGesamtPreisLagerung(){
+        return this.artikelPreisAktuell.multiply(BigDecimal.valueOf(this.artikelBestand));
     }
+
+    /**
+     * Gibt die Artikel Beschreibung zurück.
+     * Benutzt wird diese Methode von z.B. der Bestandsliste
+     *
+     * @return  artikelbezeichung
+     */
+
+    public String getArtikelBeschreibung(){
+        return this.getArtikelBezeichnung();
+    }
+
     /**
      * Weist dem Attribut ArtikelNr einen neuen Wert zu.
      * Die neue ArtikelNr muss vierstellig sein.
      *
      * @param  artikelNr    die neue ArtikelNr
      */
+
 
     public void setArtikelNr(int artikelNr){
 
@@ -248,7 +261,7 @@ public class Artikel
      *          artikel Nr, atikelBez und artikelBest aus.
      */
 
-    public String toString() {
+   /* public String toString() {
         StringBuffer str = new StringBuffer();
         str.append( "Nummer: "  + artikelNr + "\n" +
                 "Bezeichnung: "     + artikelBezeichnung + "\n" +
@@ -256,5 +269,15 @@ public class Artikel
                 "Preis: "           + artikelPreisAktuell.toString() + "€" + "\n" +
                 "Einkaufs-Preis: "  + artikelPreisEK.toString() + "€" + "\n");
         return str.toString();
+    }*/
+
+    public String toString(){
+        return String.format("%-4d | %-40.40s | %3.2f | %8d | %05.2f €\n",
+                this.getArtikelNr(),
+                this.getBeschreibung(),
+                this.getArtikelPreisAktuell().doubleValue(),
+                this.getArtikelBestand(),
+                this.getGesamtPreisLagerung()
+        );
     }
 }

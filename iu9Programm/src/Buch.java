@@ -39,10 +39,10 @@ public class Buch extends Artikel
         return this.author + " : " + this.titel;
     }
 
-    public String toString(){
+    /*public String toString(){
         return super.toString()+
                 "Titel: "+this.titel+"\n"+
                 "Author: "+this.author+"\n"+
                 "Verlag: "+this.verlag+"\n";
-    }
+    }*/
 }

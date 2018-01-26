@@ -275,10 +275,12 @@ public class Lager
     /**
      * Diese Methode prüft ob das Lager bereits voll ist.
      * Dadurch wird verhindert, dass die Größe des Arrays überschritten wird.
+     *
+     * TODO Prüfen ob ArtikelTab kleiner oder gleich sein darf.
      */
 
     public void lagerBereitsVollCheck(){
-        check(anzahlArtikel < artikelTab.length, "Das Lager ist voll");
+        check(anzahlArtikel <= artikelTab.length, "Das Lager ist voll");
     }
 
     /**

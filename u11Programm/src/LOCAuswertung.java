@@ -46,6 +46,7 @@ public class LOCAuswertung {
             //Vorläufig
             //args = new String[1];
             //args[0] = "";
+            //comment
 
             if (args.length == 0) {
                 throw new LOCAusnahme("Keine Datei ausgewählt.");

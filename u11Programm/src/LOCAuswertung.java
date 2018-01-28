@@ -1,4 +1,6 @@
 import java.io.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class LOCAuswertung {
 
@@ -17,12 +19,12 @@ public class LOCAuswertung {
             out.println("Kann" + file + "nicht lesen");
         }
 
-        //TODO Findet Comments nicht. regex in demo funktionsfähig. Vllt nicht in Java
-
         try {
             String line;
+            Pattern p = Pattern.compile("(^\\/\\/)+");
             while ((line = in.readLine()) != null){
-                if(!(line.matches("(?:\\/\\/)+")) && line.trim().length() != 0) {
+                Matcher m = p.matcher(line.trim());
+                if(!(m.find()) && line.trim().length() != 0) {
                     zeilen++;
                 }
             }
@@ -42,8 +44,8 @@ public class LOCAuswertung {
                     System.getProperty("user.dir"));
 
             //Vorläufig
-            args = new String[1];
-            args[0] = "testdatei.java";
+            //args = new String[1];
+            //args[0] = "testdatei.java";
 
             if (args.length == 0) {
                 throw new LOCAusnahme("Keine Datei ausgewählt.");

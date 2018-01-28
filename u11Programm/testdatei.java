@@ -1,7 +1,15 @@
 import java.io.*;
 
-public class LOCAuswertung {
+public class testDatei {
 
-    //private File file;
-    private PrintStream out = System.out;
-    private int zeilenGes = 0;
+ //private File file;
+    private int out = 4;
+    private int zeilenGes = 0;//Peter
+
+    public testDatei (){
+        String str = "Dies ist nur eine Testdatei";
+    }
+
+
+
+}

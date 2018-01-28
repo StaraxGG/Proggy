@@ -7,7 +7,7 @@ public class testDatei {
     private int zeilenGes = 0;//Peter
 
     public testDatei (){
-        String str = "Dies ist nur eine Testdatei";
+        //"Dies ist nur eine Testdatei";
     }
 
 

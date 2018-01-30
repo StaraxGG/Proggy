@@ -6,17 +6,18 @@ public class StringQueue implements Queue{
 
     public StringQueue(int max){
         this.max = max;
+        QueueTab = new String[max];
     }
 
     @Override
     public void addlast(Object o) {
-/*
+
         if (!o.getClass().equals(String.class)) {
             throw new IllegalArgumentException("Muss vom Typ String sein.");
         }
-*/
+
         if (gefuellt+1 > QueueTab.length){
-            throw new IllegalArgumentException("Warteschlange bereits voll.");
+            throw new IllegalArgumentException("Warteschlange mit der Größe: "+max+" ist bereits voll.");
         }
 
         QueueTab[gefuellt] = (String) o;
@@ -24,10 +25,15 @@ public class StringQueue implements Queue{
     }
 
     @Override
-    public String get(int i) {
-        String str = QueueTab[i];
-        shiftDelete(i);
+    public Object removeFirst() {
+        String str = QueueTab[0];
+        shiftDelete(0);
         return str;
+    }
+
+    @Override
+    public String get(int i){
+        return QueueTab[i];
     }
 
     @Override
@@ -52,7 +58,7 @@ public class StringQueue implements Queue{
     }
 
     private void shiftDelete(int k){
-        for (int i=k;i<QueueTab.length-1;i++){
+        for (int i=k;i<gefuellt-1;i++){
             QueueTab[i] = QueueTab[i+1];
         }
         QueueTab[gefuellt-1] = null;

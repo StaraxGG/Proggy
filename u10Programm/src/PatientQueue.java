@@ -1,50 +1,51 @@
+public class PatientQueue extends MetaQueue implements Queue {
 
-import java.util.LinkedList;
-
-public class PatientQueue implements Queue {
-
-    private LinkedList<Patient> warteschlange;
-    private int max;
 
 
     public PatientQueue(int max){
-        this.max = max;
-        warteschlange = new LinkedList<>();
+        super(max);
     }
+
+    //TODO Eigene Exception
 
     @Override
     public void addlast(Object o) {
-            if(!o.getClass().equals(Patient.class)){
+        if(!(o instanceof Patient)){
                 throw new IllegalArgumentException("Parameter muss vom Typ Patient sein.");
             }
-        if (warteschlange.size()+1 > max){
-                throw new IllegalArgumentException("Ihre Warteschlange mit der Größe: "+max+" ist bereits voll.");
+        if (super.size()+1 >= super.gefuellt){
+                throw new IllegalArgumentException("Ihre Warteschlange mit der Größe: "+super.size()+" ist bereits voll.");
         }
-            warteschlange.add((Patient)o);
+        super.addlast(o);
     }
 
     @Override
     public Object removeFirst() {
-        return warteschlange.removeFirst();
+        return super.removeFirst();
     }
 
     @Override
-    public Object get(int i) {
-        return warteschlange.get(i);
+    public Patient get(int i) {
+        return (Patient) super.get(i);
     }
 
     @Override
     public boolean empty() {
-        return warteschlange.isEmpty();
+        return super.empty();
     }
 
     @Override
     public boolean full() {
-        return warteschlange.size() <= max;
+        return super.full();
     }
 
     @Override
     public int size() {
-        return warteschlange.size();
+        return super.size();
+    }
+
+    @Override
+    public String toString(){
+        return super.toString();
     }
 }

@@ -17,12 +17,12 @@ public class QueueDialog {
 
 
     public void start(){
-        int p = -1;
+        int funktion = -1;
 
-        while (p != CONST_ENDE){
+        while (funktion != CONST_ENDE){
             try {
-                p = auswahl();
-                ausfuehren(p);
+                funktion = auswahl();
+                ausfuehren(funktion);
             }
             catch (IllegalArgumentException e){
                 System.err.println(e);
@@ -123,7 +123,7 @@ public class QueueDialog {
         int max = inputInt();
         patQueue = new PatientQueue(max);
     }
-   
+
     private void print(Queue q){
         validiere(q);
         StringBuffer str = new StringBuffer();

@@ -1,12 +1,7 @@
-public class StringQueue implements Queue{
-
-    private String[] QueueTab;
-    private int gefuellt = 0;
-    private int max;
+public class StringQueue extends MetaQueue implements Queue{
 
     public StringQueue(int max){
-        this.max = max;
-        QueueTab = new String[max];
+        super(max);
     }
 
     @Override
@@ -16,52 +11,40 @@ public class StringQueue implements Queue{
             throw new IllegalArgumentException("Muss vom Typ String sein.");
         }
 
-        if (gefuellt+1 > QueueTab.length){
-            throw new IllegalArgumentException("Warteschlange mit der Größe: "+max+" ist bereits voll.");
+        if (gefuellt+1 > super.size()){
+            throw new IllegalArgumentException("Warteschlange mit der Größe: "+ super.size() +" ist bereits voll.");
         }
 
-        QueueTab[gefuellt] = (String) o;
-        gefuellt++;
+        super.addlast(o);
     }
 
     @Override
     public Object removeFirst() {
-        String str = QueueTab[0];
-        shiftDelete(0);
-        return str;
+        return super.removeFirst();
     }
 
     @Override
     public String get(int i){
-        return QueueTab[i];
+        return (String) super.get(i);
     }
 
     @Override
     public boolean empty() {
-        if (QueueTab.length != 0) {
-            return false;
-        }
-        return true;
+        return super.empty();
     }
 
     @Override
     public boolean full() {
-        if (gefuellt == QueueTab.length) {
-            return true;
-        }
-        return false;
+        return super.full();
     }
 
     @Override
     public int size() {
-        return QueueTab.length;
+        return super.size();
     }
 
-    private void shiftDelete(int k){
-        for (int i=k;i<gefuellt-1;i++){
-            QueueTab[i] = QueueTab[i+1];
-        }
-        QueueTab[gefuellt-1] = null;
-        gefuellt--;
+    @Override
+    public String toString(){
+        return super.toString();
     }
 }

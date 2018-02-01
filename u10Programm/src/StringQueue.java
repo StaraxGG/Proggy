@@ -1,8 +1,19 @@
 public class StringQueue extends MetaQueue implements Queue{
 
+    /**
+     * Konstruktor der Klasse StringQueue
+     * @param max   Maximale Queue Länge
+     */
+
     public StringQueue(int max){
         super(max);
     }
+
+    /**
+     * Fügt Objekt vom Typ String am Ende der Liste ein.
+     *
+     * @param o Objekt vom Typ String
+     */
 
     @Override
     public void addlast(Object o) {
@@ -18,31 +29,10 @@ public class StringQueue extends MetaQueue implements Queue{
         super.addlast(o);
     }
 
-    @Override
-    public Object removeFirst() {
-        return super.removeFirst();
-    }
-
-    @Override
-    public String get(int i){
-        return (String) super.get(i);
-    }
-
-    @Override
-    public boolean empty() {
-        return super.empty();
-    }
-
-    @Override
-    public boolean full() {
-        return super.full();
-    }
-
-    @Override
-    public int size() {
-        return super.size();
-    }
-
+    /**
+     * toString Methode der Klasse StringQueue
+     * @return  aufbereiteter String mit inhalt der Klasse StringQueue
+     */
     @Override
     public String toString(){
         return super.toString();

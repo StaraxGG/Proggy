@@ -49,7 +49,7 @@ public class LOCAuswertung {
             //comment
 
             if (args.length == 0) {
-                throw new LOCAusnahme("Keine Datei ausgewählt.");
+                throw new LOCNoFileException("Keine Datei ausgewählt.");
             }
 
             StringBuffer ergebnis = new StringBuffer();
@@ -62,7 +62,7 @@ public class LOCAuswertung {
             ergebnis.append("\nGesamt:\n" + args.length +" Datei "+zeilenGes+" LOC\n");
             out.println(ergebnis.toString());
 
-        } catch (LOCAusnahme e) {
+        } catch (LOCNoFileException e) {
             System.err.println(e);
         } catch (IOException e) {
             System.err.println(e);

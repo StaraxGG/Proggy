@@ -1,12 +1,20 @@
 public class PatientQueue extends MetaQueue implements Queue {
 
+    //TODO Eigene Exception
 
+    /**
+     * Konstruktor der Klasse PatientQueue
+     * @param max   größe der Queue
+     */
 
-    public PatientQueue(int max){
+    public PatientQueue(int max) {
         super(max);
     }
 
-    //TODO Eigene Exception
+    /**
+     * Fügt Objekte vom Typ String am Ende der Liste an
+     * @param o Objekt vom Typ Object das am Ende eingefügt werden soll.
+     */
 
     @Override
     public void addlast(Object o) {
@@ -19,30 +27,10 @@ public class PatientQueue extends MetaQueue implements Queue {
         super.addlast(o);
     }
 
-    @Override
-    public Object removeFirst() {
-        return super.removeFirst();
-    }
-
-    @Override
-    public Patient get(int i) {
-        return (Patient) super.get(i);
-    }
-
-    @Override
-    public boolean empty() {
-        return super.empty();
-    }
-
-    @Override
-    public boolean full() {
-        return super.full();
-    }
-
-    @Override
-    public int size() {
-        return super.size();
-    }
+    /**
+     * String Methode der Klasse PatientQueue
+     * @return  aufbereiter String
+     */
 
     @Override
     public String toString(){

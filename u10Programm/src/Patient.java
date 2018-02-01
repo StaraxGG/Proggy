@@ -5,6 +5,7 @@
  * @author (Christian Weis & Nicolas Klein)
  * @version (09.01.2018)
  */
+
 public class Patient
 {
     private int patientenNR;
@@ -59,6 +60,7 @@ public class Patient
      *
      * @param   patientenName
      */
+
     public void setPatientenName(String patientenName){
         check(patientenName.trim().length()>0 && patientenName != "",F_PATNAME_LEER);
         this.patientenName = patientenName;
@@ -69,6 +71,7 @@ public class Patient
      *
      * @exception   Methode wirft passende Fehlermeldung, wenn Bedingung "false" ist
      */
+
     private void check(boolean bedingung, String fehlertext){
         if(bedingung != true){
             throw new RuntimeException(fehlertext);

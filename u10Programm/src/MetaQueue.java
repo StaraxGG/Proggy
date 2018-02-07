@@ -1,5 +1,6 @@
 public class MetaQueue implements Queue {
 
+    // <>
     Object[] queueTab;
     int gefuellt = 0;
 

@@ -1,12 +1,13 @@
-public interface Queue{
 
-    void addlast(Object o);
+
+public interface Queue<E>{
+
+    void addlast(E o);
 
     Object removeFirst();
 
     Object get(int i);
     boolean empty();
-    boolean full();
 
     int size();
 }

@@ -1,5 +1,4 @@
 
-
 public interface Queue<E>{
 
     void addlast(E o);

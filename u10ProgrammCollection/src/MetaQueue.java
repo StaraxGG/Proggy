@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class MetaQueue<E> implements Queue<E>, Iterable<E>{
+public class MetaQueue<E extends Serializable> implements Queue<E>, Iterable<E>, Serializable{
 
     private LinkedList<E> queue = new LinkedList<>();
 
@@ -76,6 +76,7 @@ public class MetaQueue<E> implements Queue<E>, Iterable<E>{
      * Einlesen der Queue aus einer vom
      * Benutzer wählbaren Datei
      *
+     * @param dat String mit Pfad zur Datei
      * TODO CHECK CAST 
      */
 
@@ -84,7 +85,11 @@ public class MetaQueue<E> implements Queue<E>, Iterable<E>{
         ObjectInputStream in = new ObjectInputStream(
                                new BufferedInputStream(
                                new FileInputStream(datei)));
-        LinkedList<E> objQueue = (LinkedList<E>) in.readObject();
+        //TODO How to check generic cast
+        Object queueIn = in.readObject();
+        queue = (LinkedList<E>) queueIn;
+        //LinkedList<E> objQueue = (LinkedList<E>) in.readObject();
+        in.close();
     }
 
     /**
@@ -94,6 +99,7 @@ public class MetaQueue<E> implements Queue<E>, Iterable<E>{
      */
 
     public LinkedList<E> clone(){
+        LinkedList<E> ls = (LinkedList<E>)queue.clone();
         LinkedList<E> listClone = new LinkedList<>();
         for (E e : queue){
             listClone.add(e);

@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.Iterator;
 
-public class QueueDialog {
+public class QueueRead {
 
     private static final String pfad = "C:\\Users\\Nicolas\\Documents\\InteliJProgramme\\u10ProgrammCollection\\src\\data.txt";
 
@@ -52,6 +52,6 @@ public class QueueDialog {
      */
 
     public static void main (String[] args) throws IOException{
-        new QueueDialog().start();
+        new QueueRead().start();
     }
 }

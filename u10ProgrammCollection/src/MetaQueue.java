@@ -90,7 +90,6 @@ public class MetaQueue<E extends Serializable> implements Queue<E>, Iterable<E>,
         //TODO How to check generic cast
         Object queueIn = in.readObject();
         queue = (LinkedList<E>) queueIn;
-        //LinkedList<E> objQueue = (LinkedList<E>) in.readObject();
         in.close();
     }
 
@@ -151,5 +150,25 @@ public class MetaQueue<E extends Serializable> implements Queue<E>, Iterable<E>,
     @Override
     public Iterator<E> iterator() {
         return queue.iterator();
+    }
+
+    /**
+     * TO String Methode der Klasse MetaQueue
+     *
+     * @return String mit allen Werten
+     */
+
+    @Override
+    public String toString(){
+        Iterator<E> it = queue.iterator();
+        StringBuffer bf = new StringBuffer();
+
+        bf.append("\n -- Your Queue: -- \n");
+        while(it.hasNext()){
+            bf.append(it.next().toString()+"\n");
+        }
+        bf.append(" -- End of Queue -- \n");
+
+        return bf.toString();
     }
 }

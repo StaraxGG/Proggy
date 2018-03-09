@@ -61,6 +61,8 @@ public class MetaQueue<E extends Serializable> implements Queue<E>, Iterable<E>,
     /**
      * Ausgabe der Queue in eine vom
      * Benutzer wählbare Datei
+     *
+     * @param dat Ziel Dateipfad
      */
 
     public void serialize(String dat)throws IOException{

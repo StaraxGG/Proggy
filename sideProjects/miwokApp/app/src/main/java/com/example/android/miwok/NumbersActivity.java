@@ -94,7 +94,15 @@ public class NumbersActivity extends AppCompatActivity {
             }
         });
     }
-        /**
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //When in stopped state, release MediaPlayer to stop playing audio in the background.
+        releaseMediaPlayer();
+    }
+
+    /**
          * Clean up the media player by releasing its resources.
          */
         private void releaseMediaPlayer(){

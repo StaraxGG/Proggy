@@ -1,19 +1,25 @@
 import java.io.*;
+import java.util.LinkedList;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class LOCAuswertung {
 
-    private File file;
+    private GesamtAuswertung ergebnis = new GesamtAuswertung();
     private PrintStream out = System.out;
-    private int zeilenGes = 0;
 
-
-    public String auswertung(File file) throws IOException{
-        BufferedReader in = new BufferedReader(
-                            new FileReader(file));
-        int zeilen = 0;
-        String auswertung;
+    /**
+     * Wertet eine einzelne Datei aus und speichert die
+     * Ergebnisse in einem DateiAuswertung Objekt.
+     * Dieses wird wiederrum in einem GesamtAuswertung Objekt
+     * abgespeichert.
+     * @param file  auszuwertende Datei
+     * @throws IOException
+     */
+    public void auswertung(File file) throws IOException{
+        Scanner sc = new Scanner(file);
+        DateiAuswertung db = new DateiAuswertung(file.getName());
 
         if (!file.exists() || !file.canRead() || !file.isFile()){
             out.println("Kann" + file + "nicht lesen");
@@ -22,45 +28,57 @@ public class LOCAuswertung {
         try {
             String line;
             Pattern p = Pattern.compile("(^\\/\\/)+");
-            while ((line = in.readLine()) != null){
-                Matcher m = p.matcher(line.trim());
-                if(!(m.find()) && line.trim().length() != 0) {
-                    zeilen++;
+            while (sc.hasNext()){
+                line = sc.next().trim();
+                Matcher m = p.matcher(line);
+
+                if(line.length() != 0){
+                    db.addZeilenGesamt();
+                    if(m.find()){
+                        db.addZeilenComment();
+                    }
+                    else{
+                        db.addZeilenCode();
+                    }
                 }
             }
-            zeilenGes = zeilenGes+zeilen;
-            auswertung = String.format("%-25s:%-5sLOC\n",file.getName(),Integer.toString(zeilen));
+            ergebnis.add(db);
+
         }
         finally {
-            in.close();
+            sc.close();
         }
-        return auswertung;
     }
 
+    /**
+     * Start Methode der Klasse LOCAuswertung.
+     * Diese liest das Args Array aus und gibt
+     * die einzelnen Dateien an die auswerten Methode weiter
+     * welche diese dann auswertet.
+     * @param args  selber Inhalt wie args Array der main Methode
+     */
     public void start (String [] args) {
 
         try {
             out.println("Arbeitsverzeichnis: " +
                     System.getProperty("user.dir"));
 
-            //Vorläufig
+            //Vorläufig---------
             args = new String[1];
-            args[0] = "test.txt ";
-            //comment
+            args[0] = "test.txt";
+            //------------------
 
             if (args.length == 0) {
                 throw new LOCNoFileException("Keine Datei ausgewählt.");
             }
 
-            StringBuffer ergebnis = new StringBuffer();
-            ergebnis.append("Auswertung Lines of Code (LOC)\n");
             for (String datei : args) {
                 File file = new File(datei);
-                ergebnis.append(auswertung(file));
+                auswertung(file);
             }
 
-            ergebnis.append("\nGesamt:\n" + args.length +" Datei "+zeilenGes+" LOC\n");
             out.println(ergebnis.toString());
+
 
         } catch (LOCNoFileException e) {
             System.err.println(e);
@@ -71,7 +89,11 @@ public class LOCAuswertung {
         }
     }
 
-
+    /**
+     * Main Methode der Klasse LOCAuswertung,
+     * diese startet die Start Methode.
+     * @param args
+     */
     public static void main (String[] args){
         new LOCAuswertung().start(args);
     }

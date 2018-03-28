@@ -15,6 +15,8 @@
  */
 package com.example.android.miwok;
 
+import android.content.Context;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,6 +30,28 @@ public class ColorsActivity extends AppCompatActivity {
 
     /** Handles playback of all the sound files */
     private MediaPlayer mMediaPlayer;
+
+    /** Handels Audio Management */
+    private AudioManager mAudioManager;
+
+    /** Notifies about AudioFocus Changes */
+    AudioManager.OnAudioFocusChangeListener mOnAudioFocusChangeListener =
+            new AudioManager.OnAudioFocusChangeListener(){
+                public void onAudioFocusChange(int focusChange){
+                    if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT ||
+                            focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK){
+                        //Pause Playback
+                        mMediaPlayer.pause();
+                        mMediaPlayer.seekTo(0);
+                    } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN){
+                        //Resume Playback
+                        mMediaPlayer.start();
+                    } else if (focusChange == AudioManager.AUDIOFOCUS_LOSS){
+                        //Stop Playback
+                        releaseMediaPlayer();
+                    }
+                }
+            };
 
     /**
      * This listener gets triggered when the mediaplayer finishes playing a sound file.
@@ -44,6 +68,8 @@ public class ColorsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.word_list);
+
+        mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
         // Create a list of words
         final ArrayList<Word> words = new ArrayList<Word>();
@@ -82,17 +108,26 @@ public class ColorsActivity extends AppCompatActivity {
 
                 // Get the {@link Word} object at the given position the user clicked on
                 Word word = words.get(position);
+                // Request audio focus for playback
+                int result = mAudioManager.requestAudioFocus(mOnAudioFocusChangeListener,
+                        // Use the music stream.
+                        AudioManager.STREAM_MUSIC,
+                        // Request permanent focus.
+                        AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
 
-                // Create and setup the {@link MediaPlayer} for the audio resource associated
-                // with the current word
-                mMediaPlayer = MediaPlayer.create(ColorsActivity.this, word.getAudioResourceId());
+                if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+                    // We have Audiofocus now
 
-                // Start the audio file
-                mMediaPlayer.start();
+                    // Create and setup the {@link MediaPlayer} for the audio resource associated
+                    // with the current word
+                    mMediaPlayer = MediaPlayer.create(ColorsActivity.this, word.getAudioResourceId());
 
-                //Setup listener on the media player, so that we can stop and release the
-                //media Player once the sound has finished playing.
-                mMediaPlayer.setOnCompletionListener(mCompletionListener);
+                    // Start the audio file
+                    mMediaPlayer.start();
+
+                    //Releases MediaPlayer when it has finished playing
+                    mMediaPlayer.setOnCompletionListener(mCompletionListener);
+                }
             }
         });
     }
@@ -118,6 +153,8 @@ public class ColorsActivity extends AppCompatActivity {
             // setting the media player to null is an easy way to tell that the media player
             // is not configured to play an audio file at the moment.
             mMediaPlayer = null;
+
+            mAudioManager.abandonAudioFocus(mOnAudioFocusChangeListener);
         }
     }
 }

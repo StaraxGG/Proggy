@@ -8,6 +8,9 @@ public class LOCAuswertung {
     private PrintStream out = System.out;
     private int zeilenGes = 0;
 
+    /**
+    Wertet eine Datei aus und gibt das Ergebnis als String zurück.
+    */
 
     public String auswertung(File file) throws IOException{
         BufferedReader in = new BufferedReader(
